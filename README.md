@@ -1,45 +1,57 @@
 # BiteBridge 🍎
 
-BiteBridge is a full-stack food management and sharing platform dedicated to reducing food waste and connecting community members through the sharing of surplus food.
+BiteBridge is a community-driven food sharing platform that connects generous donors with people in need, reducing food waste and fighting hunger one meal at a time.
 
-**Live Site:** [BiteBridge Live](https://bite-bridge-auth.web.app) *(Deploy URL placeholder)*
+**Live Site:** [https://bite-bridge-auth.web.app](https://bite-bridge-auth.web.app)
 
-## ✨ Key Features
+## Key Features
 
--   **Secure Authentication:** Integrated Firebase Auth for Email/Password and Google Login, ensuring a safe community environment.
--   **Dynamic Food Discovery:** Browse a real-time list of available food items with advanced search and sorting by expiration date or quantity.
--   **Seamless Food Contribution:** A user-friendly "Add Food" dashboard with automated image hosting via imgbb and location tracking.
--   **Interactive Request System:** A sophisticated request modal that allows users to coordinate food pickup with community donors.
--   **Personalized Dashboards:** Dedicated management panels for donors to track their contributions and for requesters to monitor their active food requests.
--   **Responsive & Animated UI:** Built with Tailwind CSS and Framer Motion for a premium, mobile-first user experience.
+- **Secure Firebase Authentication** — Email/password and Google OAuth login with password validation (uppercase, lowercase, min 6 chars). Private routes stay protected on reload.
+- **Food Request System** — Logged-in users can request available food items via a modal with location, contact number, and reason fields. Donators see all incoming requests and can Accept or Reject them directly from the food details page.
+- **Full CRUD Food Management** — Donors can add food with imgbb image hosting, update listings with pre-filled forms, and delete items with SweetAlert2 confirmation. Food status automatically changes to "donated" when a request is accepted.
+- **Dynamic Featured Foods** — Home page displays the top 6 food items by quantity, fetched live from MongoDB, with smooth Framer Motion animations throughout.
+- **Protected API with Firebase Token Middleware** — All POST, PUT, PATCH, and DELETE server routes are secured with Firebase Admin SDK token verification. Axios interceptors automatically attach the ID token to every request.
 
-## 🚀 Tech Stack
+## Tech Stack
 
--   **Frontend:** React, React Router, TanStack Query, Framer Motion, Lucide React, React Hook Form.
--   **Backend:** Node.js, Express, MongoDB, Mongoose, Firebase Admin SDK.
--   **Hosting:** Firebase (Client), Vercel (Server), imgbb (Images).
+- **Frontend:** React 19, React Router 7, TanStack Query 5, Framer Motion, Tailwind CSS 4, React Hook Form, Lucide React, SweetAlert2
+- **Backend:** Node.js, Express 5, MongoDB with Mongoose, Firebase Admin SDK
+- **Hosting:** Firebase (Client), Vercel (Server), imgbb (Images)
 
-## 🛠️ Getting Started
+## Getting Started
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/your-username/bite-bridge.git
-    cd bite-bridge
-    ```
-2.  **Install dependencies:**
-    ```bash
-    cd client && npm install
-    cd ../server && npm install
-    ```
-3.  **Environment Variables:**
-    Create a `.env` file in both `client` and `server` folders with your API keys and configuration.
-4.  **Run Locally:**
-    ```bash
-    # Client
-    npm run dev
-    # Server
-    npm run start
-    ```
+1. Clone the repository and install dependencies:
+   ```bash
+   cd client && npm install
+   cd ../server && npm install
+   ```
+
+2. Create `.env` in `client/`:
+   ```
+   VITE_FIREBASE_API_KEY=your_key
+   VITE_FIREBASE_AUTH_DOMAIN=your_domain
+   VITE_FIREBASE_PROJECT_ID=your_project_id
+   VITE_FIREBASE_STORAGE_BUCKET=your_bucket
+   VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+   VITE_FIREBASE_APP_ID=your_app_id
+   VITE_IMGBB_API_KEY=your_imgbb_key
+   VITE_API_BASE_URL=http://localhost:5000
+   ```
+
+3. Create `.env` in `server/`:
+   ```
+   MONGO_URI=your_mongodb_uri
+   PORT=5000
+   FIREBASE_SERVICE_ACCOUNT=your_firebase_admin_json
+   ```
+
+4. Run locally:
+   ```bash
+   # Client
+   cd client && npm run dev
+   # Server
+   cd server && npm run dev
+   ```
 
 ---
 Built with ❤️ for a Hunger-Free Community.

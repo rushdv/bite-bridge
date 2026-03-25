@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   --primary: #f97316;
@@ -11,7 +8,6 @@
 
 body {
   font-family: 'Outfit', sans-serif;
-  @apply bg-gray-50 text-gray-900;
 }
 
 @layer components {
@@ -20,7 +16,6 @@ body {
   }
 }
 
-/* Animations */
 @keyframes slideDown {
   from {
     opacity: 0;
