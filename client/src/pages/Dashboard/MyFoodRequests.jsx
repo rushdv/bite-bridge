@@ -77,15 +77,14 @@ const MyFoodRequests = () => {
                                         <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">Request Date</p>
                                         <p className="text-gray-800 font-bold">{new Date(req.requestDate).toLocaleDateString()}</p>
                                     </div>
-                                </div>
-                            </div>
+                                </div>                            </div>
 
                             <div className="bg-gray-50 p-4 rounded-2xl border border-gray-100 italic text-xs text-gray-600">
                                 <p className="font-bold flex items-center mb-1 not-italic text-gray-900 border-b border-gray-200 pb-1 mr-2">
                                     <AlertCircle size={10} className="mr-1 text-orange-500" />
-                                    Your Note:
+                                    Why Needed:
                                 </p>
-                                {req.additionalNotes || "No specific notes provided."}
+                                {req.whyNeedFood || "No reason provided."}
                             </div>
                         </motion.div>
                     ))}

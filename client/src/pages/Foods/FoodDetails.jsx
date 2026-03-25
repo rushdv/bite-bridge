@@ -33,7 +33,7 @@ const FoodDetails = () => {
             const res = await axiosInstance.get(ENDPOINTS.REQUESTS_BY_FOOD(id));
             return res.data;
         },
-        enabled: !!isDonator && !!food
+        enabled: !!(user?.email && food?.donatorInfo?.email && user.email === food.donatorInfo.email)
     });
 
     const statusMutation = useMutation({

@@ -13,7 +13,15 @@ initializeFirebase();
 const app = express();
 
 app.use(cors({
-    origin: process.env.CLIENT_URL || '*',
+    origin: (origin, callback) => {
+        const allowed = (process.env.CLIENT_URL || '').split(',').map(u => u.trim());
+        // Allow requests with no origin (mobile apps, curl, Postman) or matching origins
+        if (!origin || allowed.includes(origin) || allowed.includes('*')) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 }));
 app.use(express.json());

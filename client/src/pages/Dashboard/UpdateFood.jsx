@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Edit3, MapPin, Calendar, FileText, Package, Loader2, Users } from "lucide-react";
+import { Edit3, MapPin, Calendar, FileText, Package, Loader2, Users, Link as LinkIcon } from "lucide-react";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import axiosInstance from "../../api/axiosInstance";
@@ -30,6 +30,7 @@ const UpdateFood = () => {
             reset({
                 foodName: food.foodName,
                 foodQuantity: food.foodQuantity,
+                foodImage: food.foodImage,
                 pickupLocation: food.pickupLocation,
                 additionalNotes: food.additionalNotes,
             });
@@ -42,6 +43,7 @@ const UpdateFood = () => {
         try {
             const updatedData = {
                 foodName: data.foodName,
+                foodImage: data.foodImage,
                 foodQuantity: parseInt(data.foodQuantity),
                 pickupLocation: data.pickupLocation,
                 expireDate: expireDate,
@@ -122,6 +124,24 @@ const UpdateFood = () => {
                                     {errors.foodQuantity && <p className="text-xs text-red-500 mt-1">{errors.foodQuantity.message}</p>}
                                 </div>
                             </div>
+                        </div>
+
+                        {/* Expire Date */}
+                        <div className="space-y-2">
+                            <label className="text-xs font-black text-gray-400 uppercase tracking-widest ml-1">Food Image URL</label>
+                            <div className="relative">
+                                <LinkIcon className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                                <input
+                                    {...register("foodImage", {
+                                        required: "Image URL is required",
+                                        pattern: { value: /^https?:\/\/.+/, message: "Must be a valid URL" }
+                                    })}
+                                    type="url"
+                                    className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-orange-500 outline-none transition-all"
+                                    placeholder="https://example.com/food-image.jpg"
+                                />
+                            </div>
+                            {errors.foodImage && <p className="text-xs text-red-500 mt-1">{errors.foodImage.message}</p>}
                         </div>
 
                         {/* Expire Date */}
