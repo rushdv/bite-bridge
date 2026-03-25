@@ -1,8 +1,15 @@
-// Image upload via imgbb - will be re-enabled when imgbb is available
-// Currently using direct image URL input instead
+import axios from "axios";
 
-const imageUpload = async (imageUrl) => {
-    return imageUrl;
+const imageUpload = async (imageFile) => {
+    const formData = new FormData();
+    formData.append("image", imageFile);
+
+    const { data } = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`,
+        formData
+    );
+
+    return data.data.display_url;
 };
 
 export default imageUpload;
