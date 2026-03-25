@@ -1,16 +1,37 @@
-# React + Vite
+# BiteBridge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+BiteBridge is a comprehensive food management and sharing platform.
 
-Currently, two official plugins are available:
+## Project Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```
+BiteBridge/
+├── client/                          # React Frontend (Vite)
+│   ├── src/
+│   │   ├── components/              # Reusable components
+│   │   ├── pages/                   # Page components
+│   │   ├── routes/                  # Routing logic
+│   │   ├── hooks/                   # Custom hooks
+│   │   ├── api/                     # API integration
+│   │   └── context/                 # State management
+│   └── ...
+├── server/                          # Node.js/Express Backend
+│   ├── models/                      # Database schemas
+│   ├── routes/                      # API endpoints
+│   ├── controllers/                 # Request handlers
+│   ├── middleware/                  # Custom middleware
+│   └── config/                      # Server configuration
+└── ...
+```
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend
+1. Navigate to `client/`
+2. Install dependencies: `npm install`
+3. Start dev server: `npm run dev`
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Backend
+1. Navigate to `server/`
+2. Install dependencies: `npm install`
+3. Start dev server: `npm run dev`
