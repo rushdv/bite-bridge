@@ -11,7 +11,7 @@ A full-stack community food sharing platform that connects generous donors with 
 [![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=node.js)](https://nodejs.org)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose-47A248?style=for-the-badge&logo=mongodb)](https://mongodb.com)
 
-**🌐 Live Site:** [https://bite-bridge-auth.web.app](https://bite-bridge-auth.web.app)
+**🌐 Live Site:** [https://bitebridge.netlify.app/](https://bitebridge.netlify.app/)
 
 </div>
 
@@ -75,7 +75,7 @@ A full-stack community food sharing platform that connects generous donors with 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/bite-bridge.git
+git clone https://github.com/rushdv/bite-bridge.git
 cd bite-bridge
 ```
 
