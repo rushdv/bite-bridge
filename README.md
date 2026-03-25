@@ -1,16 +1,45 @@
-# React + Vite
+# BiteBridge 🍎
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+BiteBridge is a full-stack food management and sharing platform dedicated to reducing food waste and connecting community members through the sharing of surplus food.
 
-Currently, two official plugins are available:
+**Live Site:** [BiteBridge Live](https://bite-bridge-auth.web.app) *(Deploy URL placeholder)*
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Key Features
 
-## React Compiler
+-   **Secure Authentication:** Integrated Firebase Auth for Email/Password and Google Login, ensuring a safe community environment.
+-   **Dynamic Food Discovery:** Browse a real-time list of available food items with advanced search and sorting by expiration date or quantity.
+-   **Seamless Food Contribution:** A user-friendly "Add Food" dashboard with automated image hosting via imgbb and location tracking.
+-   **Interactive Request System:** A sophisticated request modal that allows users to coordinate food pickup with community donors.
+-   **Personalized Dashboards:** Dedicated management panels for donors to track their contributions and for requesters to monitor their active food requests.
+-   **Responsive & Animated UI:** Built with Tailwind CSS and Framer Motion for a premium, mobile-first user experience.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Tech Stack
 
-## Expanding the ESLint configuration
+-   **Frontend:** React, React Router, TanStack Query, Framer Motion, Lucide React, React Hook Form.
+-   **Backend:** Node.js, Express, MongoDB, Mongoose, Firebase Admin SDK.
+-   **Hosting:** Firebase (Client), Vercel (Server), imgbb (Images).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Getting Started
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-username/bite-bridge.git
+    cd bite-bridge
+    ```
+2.  **Install dependencies:**
+    ```bash
+    cd client && npm install
+    cd ../server && npm install
+    ```
+3.  **Environment Variables:**
+    Create a `.env` file in both `client` and `server` folders with your API keys and configuration.
+4.  **Run Locally:**
+    ```bash
+    # Client
+    npm run dev
+    # Server
+    npm run start
+    ```
+
+---
+Built with ❤️ for a Hunger-Free Community.
