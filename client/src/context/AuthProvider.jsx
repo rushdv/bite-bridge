@@ -8,7 +8,7 @@ import {
     updateProfile,
     GoogleAuthProvider
 } from "firebase/auth";
-import { auth } from "../config/firebase";
+import { auth } from "../config/firebase.js";
 
 export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
