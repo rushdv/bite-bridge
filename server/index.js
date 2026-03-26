@@ -12,10 +12,13 @@ initializeFirebase();
 
 const app = express();
 
+// CORS
 app.use(cors({
     origin: (origin, callback) => {
-        const allowed = (process.env.CLIENT_URL || '').split(',').map(u => u.trim());
-        // Allow requests with no origin (mobile apps, curl, Postman) or matching origins
+        const allowed = (process.env.CLIENT_URL || '')
+            .split(',')
+            .map(u => u.trim());
+
         if (!origin || allowed.includes(origin) || allowed.includes('*')) {
             callback(null, true);
         } else {
@@ -24,24 +27,31 @@ app.use(cors({
     },
     credentials: true
 }));
+
 app.use(express.json());
 
+// Routes
 app.use('/api/foods', foodRoutes);
 app.use('/api/requests', requestRoutes);
 
+// Root route
 app.get('/', (req, res) => {
     res.send('BiteBridge API is running...');
 });
 
+// Error handler
 app.use((err, req, res, next) => {
-    const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
-    res.status(statusCode).json({
-        message: err.message,
-        stack: process.env.NODE_ENV === 'production' ? null : err.stack,
+    res.status(500).json({
+        message: err.message
     });
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+
+module.exports = app;
+
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
