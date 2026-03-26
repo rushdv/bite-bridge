@@ -12,17 +12,22 @@ initializeFirebase();
 
 const app = express();
 
-// CORS
+// CORS — allow localhost + deployed Netlify URL
 app.use(cors({
     origin: (origin, callback) => {
-        const allowed = (process.env.CLIENT_URL || '')
-            .split(',')
-            .map(u => u.trim());
+        // Allow requests with no origin (Postman, server-to-server)
+        if (!origin) return callback(null, true);
 
-        if (!origin || allowed.includes(origin) || allowed.includes('*')) {
+        const allowed = (process.env.CLIENT_URL || '*')
+            .split(',')
+            .map(u => u.trim().replace(/\/$/, ''));
+
+        const normalizedOrigin = origin.replace(/\/$/, '');
+
+        if (allowed.includes('*') || allowed.includes(normalizedOrigin)) {
             callback(null, true);
         } else {
-            callback(new Error('Not allowed by CORS'));
+            callback(new Error(`CORS: origin ${origin} not allowed`));
         }
     },
     credentials: true
@@ -30,28 +35,22 @@ app.use(cors({
 
 app.use(express.json());
 
-// Routes
 app.use('/api/foods', foodRoutes);
 app.use('/api/requests', requestRoutes);
 
-// Root route
 app.get('/', (req, res) => {
     res.send('BiteBridge API is running...');
 });
 
-// Error handler
 app.use((err, req, res, next) => {
-    res.status(500).json({
-        message: err.message
-    });
+    console.error(err.message);
+    res.status(500).json({ message: err.message });
 });
 
+// For local development
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
 
 module.exports = app;
-
-if (process.env.NODE_ENV !== 'production') {
-    const PORT = process.env.PORT || 5000;
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-    });
-}
