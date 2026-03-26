@@ -13,7 +13,7 @@ const Register = () => {
         const { name, email, photo, password } = data;
         
         try {
-            const result = await createUser(email, password);
+            await createUser(email, password);
             await updateUserProfile(name, photo);
             toast.success("Welcome to BiteBridge! Registration Successful.");
             navigate("/");
