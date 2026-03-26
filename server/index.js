@@ -12,10 +12,8 @@ initializeFirebase();
 
 const app = express();
 
-// CORS — allow localhost + deployed Netlify URL
 app.use(cors({
     origin: (origin, callback) => {
-        // Allow requests with no origin (Postman, server-to-server)
         if (!origin) return callback(null, true);
 
         const allowed = (process.env.CLIENT_URL || '*')
@@ -43,11 +41,9 @@ app.get('/', (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-    console.error(err.message);
     res.status(500).json({ message: err.message });
 });
 
-// For local development
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

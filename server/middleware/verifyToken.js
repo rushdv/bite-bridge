@@ -1,10 +1,8 @@
 const admin = require('firebase-admin');
 
 const verifyToken = async (req, res, next) => {
-    // If Firebase Admin is not initialized (missing credentials), skip verification
-    // This allows development without Firebase Admin SDK setup
     try {
-        admin.app(); // throws if not initialized
+        admin.app();
     } catch {
         return next();
     }
@@ -20,7 +18,6 @@ const verifyToken = async (req, res, next) => {
         req.user = decodedToken;
         next();
     } catch (error) {
-        console.error("Token verification error:", error.message);
         res.status(403).json({ message: "Forbidden: Invalid token" });
     }
 };
