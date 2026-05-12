@@ -83,9 +83,9 @@ const FoodDetails = () => {
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         />
                         <div className="absolute top-8 left-8">
-                            <span className={`bg-white/90 backdrop-blur-md px-6 py-2.5 rounded-2xl font-black flex items-center shadow-lg uppercase text-sm tracking-tight ${food?.foodStatus === 'donated' ? 'text-gray-500' : 'text-orange-600'}`}>
-                                <Heart size={18} className={`mr-2 ${food?.foodStatus === 'donated' ? 'fill-gray-400' : 'fill-orange-500'}`} />
-                                {food?.foodStatus === 'donated' ? 'Already Donated' : 'Available'}
+                            <span className={`bg-white/90 backdrop-blur-md px-6 py-2.5 rounded-2xl font-black flex items-center shadow-lg uppercase text-sm tracking-tight ${food?.foodStatus === 'Donated' ? 'text-gray-500' : 'text-orange-600'}`}>
+                                <Heart size={18} className={`mr-2 ${food?.foodStatus === 'Donated' ? 'fill-gray-400' : 'fill-orange-500'}`} />
+                                {food?.foodStatus === 'Donated' ? 'Already Donated' : 'Available'}
                             </span>
                         </div>
                     </div>
@@ -145,7 +145,7 @@ const FoodDetails = () => {
                         </div>
 
                         <div className="flex flex-col sm:flex-row gap-4 items-center">
-                            {food?.foodStatus !== 'donated' ? (
+                            {food?.foodStatus !== 'Donated' ? (
                                 <button
                                     onClick={() => setIsModalOpen(true)}
                                     disabled={isDonator}

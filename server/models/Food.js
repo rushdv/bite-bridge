@@ -12,7 +12,7 @@ const foodSchema = new mongoose.Schema({
         email: { type: String, required: true },
         image: { type: String, required: true }
     },
-    foodStatus: { type: String, default: "Available", enum: ["Available", "Requested", "donated"] }
+    foodStatus: { type: String, default: "Available", enum: ["Available", "Requested", "Donated"] }
 }, {
     timestamps: true
 });

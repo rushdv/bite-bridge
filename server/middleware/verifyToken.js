@@ -1,10 +1,11 @@
 const admin = require('firebase-admin');
 
 const verifyToken = async (req, res, next) => {
+    // Fail hard if Firebase is not initialized — never silently bypass auth
     try {
         admin.app();
     } catch {
-        return next();
+        return res.status(500).json({ message: "Server configuration error: Firebase not initialized" });
     }
 
     const token = req.headers.authorization?.split(' ')[1];

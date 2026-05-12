@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const rateLimit = require('express-rate-limit');
 const connectDB = require('./config/db');
 const initializeFirebase = require('./config/firebase');
 const foodRoutes = require('./routes/foodRoutes');
@@ -11,6 +12,16 @@ connectDB();
 initializeFirebase();
 
 const app = express();
+
+// Rate limiting — 100 requests per 15 minutes per IP
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { message: "Too many requests, please try again later." }
+});
+app.use('/api', limiter);
 
 app.use(cors({
     origin: (origin, callback) => {
@@ -41,7 +52,10 @@ app.get('/', (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-    res.status(500).json({ message: err.message });
+    const status = err.status || err.statusCode || 500;
+    const message = err.message || "Internal Server Error";
+    console.error(`[Error] ${status} - ${message}`);
+    res.status(status).json({ message });
 });
 
 const PORT = process.env.PORT || 5000;

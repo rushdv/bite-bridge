@@ -11,14 +11,22 @@ const AvailableFoods = () => {
     const [search, setSearch] = useState("");
     const [layout, setLayout] = useState("grid"); // grid or list
     const [sortBy, setSortBy] = useState("expireDate");
+    const [page, setPage] = useState(1);
+    const PAGE_SIZE = 20;
 
-    const { data: foods, isLoading } = useQuery({
-        queryKey: ["availableFoods", search, sortBy],
+    const { data, isLoading } = useQuery({
+        queryKey: ["availableFoods", search, sortBy, page],
         queryFn: async () => {
-            const res = await axiosInstance.get(`${ENDPOINTS.FOODS}?search=${search}&sortBy=${sortBy}`);
+            const res = await axiosInstance.get(
+                `${ENDPOINTS.FOODS}?search=${search}&sortBy=${sortBy}&page=${page}&limit=${PAGE_SIZE}`
+            );
             return res.data;
-        }
+        },
+        keepPreviousData: true
     });
+
+    const foods = data?.foods ?? [];
+    const totalPages = data?.totalPages ?? 1;
 
     return (
         <section className="py-12 bg-gray-50 min-h-screen">
@@ -99,6 +107,29 @@ const AvailableFoods = () => {
                         </div>
                         <h3 className="text-2xl font-bold text-gray-900 mb-2 font-outfit uppercase">No food found</h3>
                         <p className="text-gray-500">Try adjusting your search or check back later!</p>
+                    </div>
+                )}
+
+                {/* Pagination */}
+                {totalPages > 1 && (
+                    <div className="flex justify-center items-center gap-3 mt-12">
+                        <button
+                            onClick={() => setPage((p) => Math.max(1, p - 1))}
+                            disabled={page === 1}
+                            className="px-5 py-2.5 rounded-xl bg-white border border-gray-200 font-bold text-gray-600 hover:bg-orange-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                        >
+                            Previous
+                        </button>
+                        <span className="text-sm font-bold text-gray-500">
+                            Page {page} of {totalPages}
+                        </span>
+                        <button
+                            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                            disabled={page === totalPages}
+                            className="px-5 py-2.5 rounded-xl bg-white border border-gray-200 font-bold text-gray-600 hover:bg-orange-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                        >
+                            Next
+                        </button>
                     </div>
                 )}
             </div>
