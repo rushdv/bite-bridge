@@ -1,22 +1,26 @@
 const imageUpload = async (imageFile) => {
+    const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+    const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+
     const formData = new FormData();
     formData.append("file", imageFile);
-    formData.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
-    formData.append("cloud_name", import.meta.env.VITE_CLOUDINARY_CLOUD_NAME);
+    formData.append("upload_preset", uploadPreset);
 
     const res = await fetch(
-        `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
         {
             method: "POST",
             body: formData,
         }
     );
 
+    const data = await res.json();
+
     if (!res.ok) {
-        throw new Error("Image upload failed");
+        console.error("Cloudinary error:", data);
+        throw new Error(data?.error?.message || "Image upload failed");
     }
 
-    const data = await res.json();
     return data.secure_url;
 };
 
